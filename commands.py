@@ -9,7 +9,6 @@ def main():
             init(sys.argv[2])
         if cmd == "add":
             add(sys.argv[2])
-
     except IndexError:
         print("Invalid of args")
         return

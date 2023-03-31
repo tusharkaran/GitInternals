@@ -1,18 +1,13 @@
 import os
 import utility
 import shelve
-from constants import BASE_PATH,INDEX_PATH,OBJ_PATH
+from constants import BASE_PATH,STAGE_PATH,OBJ_PATH
 
 def stage(file_path ,modified):
     file_stage = utility.intial(file_path ,os.stat(file_path) ,modified)
-    print("stage self" ,file_stage, INDEX_PATH)
-
-    with shelve.open(INDEX_PATH) as index:
+    utility.compress_file_by_path(file_path)
+    with shelve.open(STAGE_PATH) as index:
         index[file_path] = file_stage
-    
-        
-
-
 
 
 
@@ -23,16 +18,16 @@ def add(path):
                add(os.path.join(path,file))
     else:
         try:
-            # entry_sha = utility.getshafromindex(path)
+            entry_sha = utility.getshafromindex(path)
             sha_file = utility.isSha(path)
-            # modified = entry_sha != sha_file
-            modified = True
-            stage(path , modified)
-            # if not modified:   
-            #     return
+            modified = entry_sha != sha_file
+            
+            if not modified:   
+                return
         except:
             pass
-        
+        stage(path , modified)
+        modified = False
         
         
 
