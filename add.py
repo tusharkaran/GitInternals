@@ -20,8 +20,8 @@ def add(path):
         try:
             entry_sha = utility.getshafromindex(path)
             sha_file = utility.isSha(path)
+            utility.decompress_file_by_path(sha_file)
             modified = entry_sha != sha_file
-            
             if not modified:   
                 return
         except:
