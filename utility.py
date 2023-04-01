@@ -9,6 +9,7 @@ class intial:
         self.file_path = file_path
         self.sha = isSha(file_path)
         self.stat = stat
+        self.modified = modified
 
 
 
