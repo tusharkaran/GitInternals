@@ -5,6 +5,7 @@ from constants import BASE_PATH,STAGE_PATH,OBJ_PATH
 
 def stage(file_path ,modified):
     file_stage = utility.intial(file_path ,os.stat(file_path) ,modified)
+    print(file_stage)
     utility.compress_file_by_path(file_path)
     with shelve.open(STAGE_PATH) as index:
         index[file_path] = file_stage
@@ -20,14 +21,14 @@ def add(path):
         try:
             entry_sha = utility.getshafromindex(path)
             sha_file = utility.isSha(path)
-            utility.decompress_file_by_path(sha_file)
             modified = entry_sha != sha_file
             if not modified:   
                 return
         except:
             pass
+        modified = True
         stage(path , modified)
-        modified = False
+        
         
         
 

@@ -5,13 +5,12 @@ from commit import commit
 def main():
     try: 
         cmd = sys.argv[1]
-
         if cmd == "init":
             init(sys.argv[2])
         if cmd == "add":
             add(sys.argv[2])
         if cmd == "commit":
-            commit(commit_message = sys.argv[2])
+            commit(sys.argv[2])
     except IndexError:
         print("Invalid of args")
         return
