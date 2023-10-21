@@ -2,6 +2,7 @@ import os
 import hashlib
 import shelve
 import zlib
+import pickle
 from constants import STAGE_PATH ,OBJ_PATH
 
 class intial:
@@ -48,3 +49,30 @@ def getshafromindex(filepath):
             return
 
         
+def get_modified_entry():
+    modified_entry = []
+    with shelve.open(STAGE_PATH) as index:
+        try:
+            for key in index.keys():
+                entry = index[key]
+                if entry.modified:
+                    modified_entry.append(entry)
+        except KeyError:
+            return
+    return modified_entry    
+
+
+def compress_tree(dic):
+    data = pickle.dumps(dic)
+    hash = hashlib.sha256(data).hexdigest()
+    c_data = zlib.compress(data, zlib.Z_BEST_COMPRESSION)
+    f = open(os.path.join(OBJ_PATH, hash), 'wb')
+    f.write(c_data)
+    f.close()
+    # perm = oct(os.stat(os.path.join(OBJ_DIR, hash)).st_mode)[2:]
+    # fname = os.path.basename(os.path.join(OBJ_DIR, hash))
+    # dic = {}
+    # dic['filename'] = fname
+    # dic['permissions'] = perm
+    # dic['sha256'] = hash
+    return hash

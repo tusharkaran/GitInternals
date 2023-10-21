@@ -1,7 +1,7 @@
 import os
 import sys
 
-temp = "c:/Users/TUSHAR/Desktop/GitTest"
+temp = "c:/GitTest"
 BASE_PATH = os.path.join(temp, '.base')
 STAGE_PATH = os.path.join(BASE_PATH, 'index')
 OBJ_PATH = os.path.join(BASE_PATH, 'objects')

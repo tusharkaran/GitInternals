@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "main.py",
             "console": "integratedTerminal",
-            "args": ["add" , "c:/Users/TUSHAR/Desktop/GitTest"]
+            "args": ["commit" , "c:/GitTest"]
         }
     ]
 }

@@ -21,9 +21,11 @@ def commmit_object(message):
         "commit_message":message
     }
     data_head = open(HEAD_PATH , "r").read()
-    object_head_file = open(os.path.join(OBJ_PATH , data_head) , 'rb').read()
-    if object_head_file != "":
-        dict["parent_tree"] = data_head
+    if data_head != "main":
+        object_head_file = open(os.path.join(OBJ_PATH , data_head) , 'rb')
+        if object_head_file :
+            object_head_file.read()
+            dict["parent_tree"] = data_head
     
     data = pickle.dumps(dict)
     sha = hashlib.sha256(data).hexdigest()
